@@ -2,30 +2,65 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <meta name="format-detection" content="telephone=no">
-    <title>内娱操盘手: 从零开始</title>
-
-    <!-- 手机适配补丁 (保留这个) -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mobile-drag-drop@2.3.0-rc.2/default.css">
-    <script src="https://cdn.jsdelivr.net/npm/mobile-drag-drop@2.3.0-rc.2/index.min.js"></script>
-    <script>
-        try {
-            MobileDragDrop.polyfill({
-                dragImageTranslateOverride: MobileDragDrop.scrollBehaviourDragImageTranslateOverride
-            });
-        } catch (e) {}
-    </script>
-    <script type="module" crossorigin src="/BuzzMakerStudios/assets/index-CAqs2hXl.js"></script>
-    <link rel="stylesheet" crossorigin href="/BuzzMakerStudios/assets/index-D1z17Q7i.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Google AI Studio App</title>
   </head>
-  
-  <body class="bg-gray-900 text-white overflow-hidden h-[100dvh] w-screen">
-    <div id="root" class="h-full w-full"></div>
-    
-    <!-- ⚠️ 宝子注意：下面这一行引用的文件必须是你 src 里真实存在的文件名 -->
-    <!-- 如果你的文件叫 main.tsx，就不用改 -->
-    <!-- 如果你的文件叫 index.tsx，请手动把下面的 main.tsx 改成 index.tsx -->
+  <body>
+    <div id="root"></div>
+
+    <!-- API Access Terminal -->
+    <div id="api-terminal-overlay" style="display: none; background-color: rgba(2, 6, 23, 0.95);">
+      <div id="api-terminal" class="glass">
+        <div class="terminal-header">
+          <h2 class="text-2xl font-bold text-white tracking-tight">API 神经链路接入终端</h2>
+          <p class="text-sm text-slate-400 mt-2">在访问SCS引擎之前，需要建立与AI模型的神经连接。</p>
+        </div>
+        <div class="terminal-body">
+          <div class="form-group">
+            <label for="api-url">接口地址 (API URL)</label>
+            <input type="text" id="api-url" value="https://api.deepseek.com/v1">
+          </div>
+          <div class="form-group">
+            <label for="api-model">模型名称 (Model Name)</label>
+            <input type="text" id="api-model" value="deepseek-chat">
+          </div>
+          <div class="form-group">
+            <label for="api-key">API 密钥 (API Key)</label>
+            <input type="password" id="api-key" placeholder="在此输入你的API Key">
+          </div>
+          <div class="form-group">
+             <p class="tutorial-link">不知道如何获取？<a href="#" id="show-tutorial">点击查看简单教程</a></p>
+          </div>
+        </div>
+        <div class="terminal-footer">
+          <button id="connect-button">连接系统</button>
+        </div>
+      </div>
+      <div id="api-tutorial-modal" style="display: none;">
+         <div class="tutorial-content glass">
+            <h3 class="text-xl font-bold text-cyan-400 mb-4">如何获取并配置 API 信息</h3>
+            <p>本游戏需要连接一个大型语言模型（LLM）来动态生成剧情。您需要从 AI 服务提供商处获取 API 信息。</p>
+            <p><strong>步骤 1: 选择一个服务商</strong></p>
+            <p>您可以选择任意兼容 OpenAI API 格式的服务商，例如：</p>
+            <ul>
+                <li><a href="https://platform.deepseek.com/api_keys" target="_blank">DeepSeek (推荐)</a></li>
+                <li><a href="https://platform.openai.com/" target="_blank">OpenAI</a></li>
+                <li>以及其他许多第三方或本地部署的模型服务。</li>
+            </ul>
+            <p><strong>步骤 2: 获取 API Key</strong></p>
+            <p>登录您选择的平台，进入 API 管理页面，创建一个新的 API 密钥（API Key）并复制它。</p>
+            <p><strong>步骤 3: 填写信息</strong></p>
+            <ul>
+                <li><strong>接口地址:</strong> 这是服务商提供的 API 入口点。通常以 `v1` 结尾，例如 `https://api.deepseek.com/v1`。</li>
+                <li><strong>模型名称:</strong> 这是您希望使用的具体模型，例如 `deepseek-chat` 或 `gpt-4-turbo`。</li>
+                <li><strong>API 密钥:</strong> 将您复制的密钥粘贴到此处。</li>
+            </ul>
+            <button id="close-tutorial">关闭教程</button>
+         </div>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
+
